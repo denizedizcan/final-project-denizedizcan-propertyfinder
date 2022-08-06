@@ -4,128 +4,68 @@
     "sku": 555524,
     "is_active": true,
     "language": "tr-tr",
-    "vat":"%1",
-    "attributes": {
-      "ColorId": "1eea5359-b293-440a-89b1-d843212163c0",
-      "ColorDesc": "Khaki",
-      "SizeId": "5241716d-a9ae-4f73-8408-c9d8dcaa1a8f",
-      "SizeDesc": "S"
-    }
+    "vat":"%1"
   }, {
     "name": "Rain Jacket Women Windbreaker Striped Climbing Raincoats",
     "base_code": "55714-4409",
     "sku": 245774,
     "is_active": true,
     "language": "tr-tr",
-    "vat":"%8",
-    "attributes": {
-      "ColorId": "d743051b-0ad8-4cd2-b82e-97116ad64a77",
-      "ColorDesc": "Turquoise",
-      "SizeId": "e4f6afa3-fc48-4260-a179-da4b8ab21fb5",
-      "SizeDesc": "L"
-    }
+    "vat":"%8"
   }, {
     "name": "Mens Casual Premium T-Shirts",
     "base_code": "11444-020",
     "sku": "457751",
     "is_active": true,
     "language": "tr-tr",
-    "vat":"%1",
-    "attributes": {
-      "ColorId": "1198c53d-4ceb-4472-bc4d-1f7b28bd22f7",
-      "ColorDesc": "Khaki",
-      "SizeId": "4b81d08c-80c1-43b1-9cd9-8659b5dffbab",
-      "SizeDesc": "XL"
-    }
+    "vat":"%1"
   }, {
     "name": "Mens Casual Premium Slim Fit T-Shirts",
     "base_code": "0363-8220",
     "sku": 178283,
     "is_active": false,
     "language": "tr-tr",
-    "vat":"%1",
-    "attributes": {
-      "ColorId": "70c0fe45-43fa-4c51-a9e8-c7a8826b638e",
-      "ColorDesc": "Blue",
-      "SizeId": "ffd25c38-e2d6-454a-bcb5-fbbe7170f783",
-      "SizeDesc": "M"
-    }
+    "vat":"%1"
   }, {
     "name": "Removable Hooded Faux Leather Moto Biker Jacket",
     "base_code": "68084-554",
     "sku": "745313",
     "is_active": false,
     "language": "tr-tr",
-    "vat":"%1",
-    "attributes": {
-      "ColorId": "96df8b6a-34d1-4e67-9073-61d535523871",
-      "ColorDesc": "Puce",
-      "SizeId": "aa85e903-ab02-464b-99d5-d2982a07918b",
-      "SizeDesc": "XL"
-    }
+    "vat":"%1"
   }, {
     "name": "Removable Hooded Faux Leather Moto Biker Jacket",
     "base_code": "69114-1001",
     "sku": "224578",
     "is_active": true,
     "language": "tr-tr",
-    "vat":"%18",
-    "attributes": {
-      "ColorId": "2e74e266-af4d-44d9-926e-8949ee847fd4",
-      "ColorDesc": "Aquamarine",
-      "SizeId": "97d47ab9-96ee-465e-a780-1dd819710095",
-      "SizeDesc": "XL"
-    }
+    "vat":"%18"
   }, {
     "name": "Mens Casual Premium Slim Fit T-Shirts",
     "base_code": "59762-1258",
     "sku": 412245,
     "is_active": false,
     "language": "tr-tr",
-    "vat":"%8",
-    "attributes": {
-      "ColorId": "697c0c96-0de8-4505-820a-0dbb48034ee7",
-      "ColorDesc": "Pink",
-      "SizeId": "04f0ecad-c66f-4039-a0ba-0e13e86b2122",
-      "SizeDesc": "S"
-    }
+    "vat":"%8"
   }, {
     "name": "Mens Casual Premium Slim Fit T-Shirts",
     "base_code": "55700-020",
     "sku": 757544,
     "is_active": true,
     "language": "tr-tr",
-    "vat":"%8",
-    "attributes": {
-      "ColorId": "ffb18ad2-c015-46f4-95d7-7c3fcf701ace",
-      "ColorDesc": "Puce",
-      "SizeId": "c7313523-d64f-46ab-9c16-dd2a51094e0c",
-      "SizeDesc": "M"
-    }
+    "vat":"%8"
   }, {
     "name": "Mens Casual Premium Shorts", 
     "base_code": "0264-9872",
     "sku": 889656,
     "is_active": false,
     "language": "tr-tr",
-    "vat":"%18",
-    "attributes": {
-      "ColorId": "5a53c817-7beb-4db8-be89-fe5b3f685334",
-      "ColorDesc": "Maroon",
-      "SizeId": "637c95a7-aee5-470c-861a-35dbbf425a31",
-      "SizeDesc": "3XL"
-    }
+    "vat":"%18"
   }, {
     "name": "DANVOUY Womens T Shirt Casual Cotton Short",
     "base_code": "0527-1352",
     "sku": 998452,
     "is_active": true,
     "language": "tr-tr",
-    "vat":"%8",
-    "attributes": {
-      "ColorId": "958d136b-4059-4de4-a411-9f76590fc20f",
-      "ColorDesc": "Blue",
-      "SizeId": "f02f927d-cb63-4f72-ac89-fe13aea10ca2",
-      "SizeDesc": "S"
-    }
+    "vat":"%8"
   }]

@@ -9,11 +9,11 @@ import (
 type Order struct {
 	OrderNumber uint64    `gorm:"primary_key;auto_increment" json:"Sku"`
 	OrderedBy   string    `gorm:"size:255;not null;" json:"OrderedBy"`
-	UserID      uint32    `gorm:"size:255;not null;" json:"UserID"`
 	CreatedAt   time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
+	User        User      `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
 }
 
-func (p *Order) FindAllOrders(db *gorm.DB) (*[]Order, error) {
+func (p *User) FindAllOrders(db *gorm.DB) (*[]Order, error) {
 	var err error
 	Orders := []Order{}
 	err = db.Debug().Model(&Order{}).Limit(100).Find(&Orders).Error

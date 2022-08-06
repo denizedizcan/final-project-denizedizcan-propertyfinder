@@ -3,7 +3,7 @@ package models
 import (
 	"time"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 type Product struct {
@@ -16,12 +16,16 @@ type Product struct {
 	CreatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
 }
 
-func (p *Product) FindAllProducts(db *gorm.DB) (*[]Product, error) {
-	var err error
-	Products := []Product{}
-	err = db.Debug().Model(&Product{}).Limit(100).Find(&Products).Error
-	if err != nil {
-		return &[]Product{}, err
+func FindAllProducts(db *gorm.DB) ([]Product, error) {
+
+	var products []Product
+
+	if result := db.Find(&products); result.Error != nil {
+		return []Product{}, result.Error
 	}
-	return &Products, nil
+	return products, nil
+}
+
+func (p *[]Product) InsertProducts(db *gorm.DB) error{
+	if result := db.
 }

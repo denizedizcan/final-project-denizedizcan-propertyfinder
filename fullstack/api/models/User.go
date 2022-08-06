@@ -6,8 +6,9 @@ import (
 	"strings"
 	"time"
 
+	"gorm.io/gorm"
+
 	"github.com/badoux/checkmail"
-	"github.com/jinzhu/gorm"
 )
 
 //user struct fields used in db
@@ -21,7 +22,6 @@ type User struct {
 
 //user prepare values to insert or update
 func (u *User) Prepare() {
-	u.UserID = 0
 	u.Name = html.EscapeString(strings.TrimSpace(u.Name))
 	u.Email = html.EscapeString(strings.TrimSpace(u.Email))
 	u.Password = html.EscapeString(strings.TrimSpace(u.Password))
@@ -42,7 +42,20 @@ func (u *User) Validate(action string) error {
 			return errors.New("invalid email")
 		}
 		return nil
-
+	case "create":
+		if u.Name == "" {
+			return errors.New("required Name")
+		}
+		if u.Password == "" {
+			return errors.New("required password")
+		}
+		if u.Email == "" {
+			return errors.New("required email")
+		}
+		if err := checkmail.ValidateFormat(u.Email); err != nil {
+			return errors.New("invalid email")
+		}
+		return nil
 	default:
 		if u.Name == "" {
 			return errors.New("required Name")
@@ -60,32 +73,21 @@ func (u *User) Validate(action string) error {
 	}
 }
 
-func (u *User) SaveUser(db *gorm.DB) (*User, error) {
+func (u *User) SaveUser(db *gorm.DB) error {
 
-	var err error = db.Debug().Create(&u).Error
-	if err != nil {
-		return &User{}, err
+	if result := db.Create(&u); result.Error != nil {
+		return result.Error
 	}
-	return u, nil
+	return nil
 }
 
-func (u *User) FindAllUsers(db *gorm.DB) (*[]User, error) {
-	var err error
-	users := []User{}
-	err = db.Debug().Model(&User{}).Limit(100).Find(&users).Error
-	if err != nil {
-		return &[]User{}, err
-	}
-	return &users, err
-}
+func (u *User) LoginUser(db *gorm.DB) error {
 
-func (u *User) FindUserByID(db *gorm.DB, uid uint32) (*User, error) {
-	var err error = db.Debug().Model(User{}).Where("id = ?", uid).Take(&u).Error
-	if err != nil {
-		return &User{}, err
+	var user User
+
+	if result := db.Model(User{}).Where("email = ?", u.Email).Take(&user); result.Error != nil {
+		return result.Error
 	}
-	if gorm.IsRecordNotFoundError(err) {
-		return &User{}, errors.New("User Not Found")
-	}
-	return u, err
+
+	return nil
 }
