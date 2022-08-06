@@ -14,8 +14,15 @@ func main() {
 	DB := db.Init()
 	h := handlers.New(DB)
 	router := mux.NewRouter()
+
 	router.HandleFunc("/create-user", handlers.SetMiddlewareJSON(h.CreateUser)).Methods("POST")
 	router.HandleFunc("/login", handlers.SetMiddlewareJSON(h.Login)).Methods("POST")
+	router.HandleFunc("/list-products", handlers.SetMiddlewareJSON(h.GetProducts)).Methods("GET")
+	router.HandleFunc("/add-products", handlers.SetMiddlewareJSON(h.AddProducts)).Methods("PUT")
+	router.HandleFunc("/list-stocks", handlers.SetMiddlewareJSON(h.GetStocks)).Methods("GET")
+	router.HandleFunc("/add-stocks", handlers.SetMiddlewareJSON(h.AddStocks)).Methods("PUT")
+	router.HandleFunc("/list-prices", handlers.SetMiddlewareJSON(h.GetPrice)).Methods("GET")
+	router.HandleFunc("/add-prices", handlers.SetMiddlewareJSON(h.AddPrice)).Methods("PUT")
 
 	http.ListenAndServe(":12345", router)
 }

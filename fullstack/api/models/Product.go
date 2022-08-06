@@ -4,28 +4,36 @@ import (
 	"time"
 
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 type Product struct {
-	Sku       uint64    `gorm:"primary_key;auto_increment" json:"Sku"`
-	Name      string    `gorm:"size:255;not null;" json:"Name"`
-	Base_Code string    `gorm:"size:255;not null;" json:"Base_Code"`
-	Is_active bool      `gorm:"type:bool;default:false" json:"Is_active"`
-	Language  string    `gorm:"size:255;not null;" json:"Language"`
-	VAT       uint8     `gorm:"size:255;not null;" json:"VAT"`
-	CreatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
+	Sku         uint64        `gorm:"primary_key;auto_increment" json:"sku"`
+	Name        string        `json:"name"`
+	Base_Code   string        `json:"base_code"`
+	Is_active   bool          `json:"is_active"`
+	Language    string        `json:"language"`
+	VAT         uint8         `json:"vat"`
+	CreatedAt   time.Time     `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
+	Price       Price         `gorm:"foreignKey:Sku;references:sku"`
+	Stock       Stock         `gorm:"foreignKey:Sku;references:sku"`
+	OrderItems  []OrderItems  `gorm:"foreignKey:Sku;references:sku"`
+	BasketItems []BasketItems `gorm:"foreignKey:Sku;references:Sku"`
 }
 
 func FindAllProducts(db *gorm.DB) ([]Product, error) {
 
 	var products []Product
 
-	if result := db.Find(&products); result.Error != nil {
+	if result := db.Preload(clause.Associations).Find(&products); result.Error != nil {
 		return []Product{}, result.Error
 	}
 	return products, nil
 }
 
-func (p *[]Product) InsertProducts(db *gorm.DB) error{
-	if result := db.
+func InsertProducts(db *gorm.DB, p []Product) error {
+	if result := db.Create(&p); result.Error != nil {
+		return result.Error
+	}
+	return nil
 }

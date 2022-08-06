@@ -1,5 +1,6 @@
 package models
 
+/*
 import (
 	"errors"
 	"fmt"
@@ -50,3 +51,4 @@ func (u *User) ValidateToken(db *gorm.DB, token string) error {
 	}
 	return nil
 }
+*/

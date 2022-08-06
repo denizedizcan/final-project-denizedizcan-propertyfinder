@@ -4,68 +4,68 @@
     "sku": 555524,
     "is_active": true,
     "language": "tr-tr",
-    "vat":"%1"
+    "vat":1
   }, {
     "name": "Rain Jacket Women Windbreaker Striped Climbing Raincoats",
     "base_code": "55714-4409",
     "sku": 245774,
     "is_active": true,
     "language": "tr-tr",
-    "vat":"%8"
+    "vat":8
   }, {
     "name": "Mens Casual Premium T-Shirts",
     "base_code": "11444-020",
-    "sku": "457751",
+    "sku": 457751,
     "is_active": true,
     "language": "tr-tr",
-    "vat":"%1"
+    "vat":1
   }, {
     "name": "Mens Casual Premium Slim Fit T-Shirts",
     "base_code": "0363-8220",
     "sku": 178283,
     "is_active": false,
     "language": "tr-tr",
-    "vat":"%1"
+    "vat":1
   }, {
     "name": "Removable Hooded Faux Leather Moto Biker Jacket",
     "base_code": "68084-554",
-    "sku": "745313",
+    "sku": 745313,
     "is_active": false,
     "language": "tr-tr",
-    "vat":"%1"
+    "vat":1
   }, {
     "name": "Removable Hooded Faux Leather Moto Biker Jacket",
     "base_code": "69114-1001",
-    "sku": "224578",
+    "sku": 224578,
     "is_active": true,
     "language": "tr-tr",
-    "vat":"%18"
+    "vat":18
   }, {
     "name": "Mens Casual Premium Slim Fit T-Shirts",
     "base_code": "59762-1258",
     "sku": 412245,
     "is_active": false,
     "language": "tr-tr",
-    "vat":"%8"
+    "vat":8
   }, {
     "name": "Mens Casual Premium Slim Fit T-Shirts",
     "base_code": "55700-020",
     "sku": 757544,
     "is_active": true,
     "language": "tr-tr",
-    "vat":"%8"
+    "vat":8
   }, {
     "name": "Mens Casual Premium Shorts", 
     "base_code": "0264-9872",
     "sku": 889656,
     "is_active": false,
     "language": "tr-tr",
-    "vat":"%18"
+    "vat":18
   }, {
     "name": "DANVOUY Womens T Shirt Casual Cotton Short",
     "base_code": "0527-1352",
     "sku": 998452,
     "is_active": true,
     "language": "tr-tr",
-    "vat":"%8"
+    "vat":8
   }]

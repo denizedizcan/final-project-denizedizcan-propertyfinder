@@ -17,6 +17,15 @@ func Init() *gorm.DB {
 		fmt.Printf("Cannot connect to %s database", postgres.Open(dbUrl))
 		log.Fatalln(err)
 	}
-	db.AutoMigrate(&models.Product{}, &models.Order{}, &models.User{}, &models.Token{})
+	db.AutoMigrate(
+		&models.Product{},
+		&models.User{},
+		&models.BasketItems{},
+		&models.Price{},
+		&models.Stock{},
+		&models.Order{},
+		&models.OrderItems{},
+		&models.Basket{},
+	)
 	return db
 }

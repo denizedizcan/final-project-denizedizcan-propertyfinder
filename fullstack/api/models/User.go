@@ -13,11 +13,13 @@ import (
 
 //user struct fields used in db
 type User struct {
-	UserID    uint32    `gorm:"primary_key;auto_increment" json:"id"`
-	Name      string    `gorm:"size:255;not null;unique" json:"Name"`
+	UserID    uint64    `gorm:"primary_key;auto_increment" json:"user_id"`
+	Name      string    `gorm:"size:255;not null;unique" json:"name"`
 	Email     string    `gorm:"size:100;not null;unique" json:"email"`
 	Password  string    `gorm:"size:100;not null;" json:"password"`
 	CreatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
+	Basket    Basket    `gorm:"foreignKey:UserID;references:UserID"`
+	Order     []Order   `gorm:"foreignKey:UserID;references:user_id"`
 }
 
 //user prepare values to insert or update

@@ -9,22 +9,22 @@ import (
 	"github.com/denizedizcan/final-project-denizedizcan-propertyfinder/api/responses"
 )
 
-func (h handler) GetProducts(w http.ResponseWriter, r *http.Request) {
+func (h handler) GetStocks(w http.ResponseWriter, r *http.Request) {
 
-	var products []models.Product
-	products, err := models.FindAllProducts(h.DB)
+	var Stocks []models.Stock
+	Stocks, err := models.FindAllStocks(h.DB)
 	if err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
 	}
-	if len(products) == 0 {
+	if len(Stocks) == 0 {
 		responses.ERROR(w, http.StatusNotFound, err)
 		return
 	}
-	responses.JSON(w, http.StatusOK, &products)
+	responses.JSON(w, http.StatusOK, &Stocks)
 }
 
-func (h handler) AddProducts(w http.ResponseWriter, r *http.Request) {
+func (h handler) AddStocks(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()
 
@@ -34,16 +34,16 @@ func (h handler) AddProducts(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusUnprocessableEntity, err)
 	}
 
-	var products []models.Product
-	err = json.Unmarshal(body, &products)
+	var Stocks []models.Stock
+	err = json.Unmarshal(body, &Stocks)
 
 	if err != nil {
 		responses.ERROR(w, http.StatusUnprocessableEntity, err)
 		return
 	}
-	if err := models.InsertProducts(h.DB, products); err != nil {
+	if err := models.InsertStocks(h.DB, Stocks); err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
 	}
-	responses.JSON(w, http.StatusOK, &products)
+	responses.JSON(w, http.StatusOK, &Stocks)
 }
