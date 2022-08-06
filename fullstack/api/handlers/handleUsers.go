@@ -35,6 +35,14 @@ func (h handler) CreateUser(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
 	}
+
+	var basket models.Basket
+	basket.UserID = user.UserID
+
+	if err := basket.InsertBasket(h.DB); err != nil {
+		responses.ERROR(w, http.StatusInternalServerError, err)
+		return
+	}
 	responses.JSON(w, http.StatusCreated, &user)
 }
 
