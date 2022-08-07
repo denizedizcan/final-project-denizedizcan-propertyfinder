@@ -37,3 +37,10 @@ func InsertProducts(db *gorm.DB, p []Product) error {
 	}
 	return nil
 }
+
+func InsertOneProduct(db *gorm.DB, p Product) error {
+	if result := db.Create(&p); result.Error != nil {
+		return result.Error
+	}
+	return nil
+}

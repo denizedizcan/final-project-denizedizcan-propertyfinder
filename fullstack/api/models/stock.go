@@ -1,6 +1,7 @@
 package models
 
 import (
+	"errors"
 	"time"
 
 	"gorm.io/gorm"
@@ -9,7 +10,7 @@ import (
 type Stock struct {
 	ID        uint64    `gorm:"primary_key;auto_increment" json:"id"`
 	Sku       uint64    `gorm:"unique" json:"sku"`
-	Quantity  uint32    `json:"stock"`
+	Quantity  uint32    `gorm:"default:0" json:"stock"`
 	CreatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
 	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
 }
@@ -29,4 +30,16 @@ func FindAllStocks(db *gorm.DB) ([]Stock, error) {
 		return []Stock{}, result.Error
 	}
 	return stocks, nil
+}
+
+func (b *BasketItems) CheckStock(db *gorm.DB) error {
+
+	var stock Stock
+	if result := db.Where("sku = ?", b.Sku).First(&stock); result.Error != nil {
+		return result.Error
+	}
+	if stock.Quantity == 0 {
+		return errors.New("no stock left")
+	}
+	return nil
 }

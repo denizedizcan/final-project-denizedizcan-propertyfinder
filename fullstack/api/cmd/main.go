@@ -23,6 +23,9 @@ func main() {
 	router.HandleFunc("/add-stocks", handlers.SetMiddlewareJSON(h.AddStocks)).Methods("PUT")
 	router.HandleFunc("/list-prices", handlers.SetMiddlewareJSON(h.GetPrice)).Methods("GET")
 	router.HandleFunc("/add-prices", handlers.SetMiddlewareJSON(h.AddPrice)).Methods("PUT")
+	router.HandleFunc("/get-basket", handlers.SetMiddlewareJSON(h.GetBasket)).Methods("GET")
+	router.HandleFunc("/add-to-basket", handlers.SetMiddlewareJSON(h.GetBasket)).Methods("POST")
+	router.HandleFunc("/update-basket", handlers.SetMiddlewareJSON(h.GetBasket)).Methods("POST")
 
 	http.ListenAndServe(":12345", router)
 }
