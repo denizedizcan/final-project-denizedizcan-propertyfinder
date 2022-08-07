@@ -106,3 +106,15 @@ func (u *User) FindUser(db *gorm.DB) error {
 	}
 	return nil
 }
+
+func (u *User) FindUserData(db *gorm.DB) (*User, error) {
+	if u.UserID != 0 {
+		if result := db.Model(User{}).Preload(clause.Associations).Find(&u); result.Error != nil {
+			return &User{}, result.Error
+		}
+	}
+	if result := db.Model(User{}).Preload(clause.Associations).Where("email = ?", u.Email).Find(&u); result.Error != nil {
+		return &User{}, result.Error
+	}
+	return u, nil
+}

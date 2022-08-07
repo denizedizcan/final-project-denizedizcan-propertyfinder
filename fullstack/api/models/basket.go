@@ -26,10 +26,24 @@ func FindAllBaskets(db *gorm.DB) ([]Basket, error) {
 	return Baskets, nil
 }
 
-func (b *BasketItems) FindUserBasket(db *gorm.DB) (Basket, error) {
+func (b *BasketItems) FindUserBasketbyBasketitem(db *gorm.DB) (Basket, error) {
 	var basket Basket
 
-	if result := db.Preload(clause.Associations).Where("basket_id = ?", b.BasketID).First(&basket); result.Error != nil {
+	if result := db.Model(Basket{}).Preload(clause.Associations).Where("basket_id = ?", b.BasketID).First(&basket); result.Error != nil {
+		return Basket{}, result.Error
+	}
+	return basket, nil
+}
+
+func (b *User) FindUserBasketbyUser(db *gorm.DB) (Basket, error) {
+
+	b, err := b.FindUserData(db)
+	if err != nil {
+		return Basket{}, err
+	}
+	var basket Basket
+
+	if result := db.Model(Basket{}).Preload(clause.Associations).Where("basket_id = ?", b.Basket.BasketID).First(&basket); result.Error != nil {
 		return Basket{}, result.Error
 	}
 	return basket, nil
@@ -45,15 +59,15 @@ func (b *Basket) InsertBasket(db *gorm.DB) error {
 func (b *BasketItems) UpdateBasketValue(db *gorm.DB) error {
 
 	var basket Basket
-	if result := db.Preload(clause.Associations).Where("basket_id = ?", b.BasketID).First(&basket); result.Error != nil {
+	if result := db.Model(Basket{}).Preload(clause.Associations).Where("basket_id = ?", b.BasketID).First(&basket); result.Error != nil {
 		return result.Error
 	}
-	var val uint32
+	var val uint32 = 0
 	for i := 0; len(basket.BasketItems) > i; i++ {
 		val += basket.BasketItems[i].Value
 	}
 
-	if result := db.Preload(clause.Associations).Where("basket_id = ?", b.BasketID).Update("value", val); result.Error != nil {
+	if result := db.Model(Basket{}).Preload(clause.Associations).Where("basket_id = ?", b.BasketID).Update("value", val); result.Error != nil {
 		return result.Error
 	}
 
