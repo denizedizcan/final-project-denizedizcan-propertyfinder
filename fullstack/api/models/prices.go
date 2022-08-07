@@ -9,7 +9,7 @@ import (
 type Price struct {
 	ID        uint64    `gorm:"primary_key;auto_increment" json:"id"`
 	Sku       uint64    `gorm:"unique" json:"sku"`
-	Value     uint32    `gorm:"default:0" json:"price"`
+	Value     uint32    `json:"price"`
 	CreatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
 	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
 }

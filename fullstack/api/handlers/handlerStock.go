@@ -47,3 +47,27 @@ func (h handler) AddStocks(w http.ResponseWriter, r *http.Request) {
 	}
 	responses.JSON(w, http.StatusOK, &Stocks)
 }
+
+func (h handler) UpdateStock(w http.ResponseWriter, r *http.Request) {
+
+	defer r.Body.Close()
+
+	body, err := ioutil.ReadAll(r.Body)
+
+	if err != nil {
+		responses.ERROR(w, http.StatusUnprocessableEntity, err)
+	}
+
+	var Stocks []models.Stock
+	err = json.Unmarshal(body, &Stocks)
+
+	if err != nil {
+		responses.ERROR(w, http.StatusUnprocessableEntity, err)
+		return
+	}
+	if err := models.UpdateStocks(h.DB, Stocks); err != nil {
+		responses.ERROR(w, http.StatusInternalServerError, err)
+		return
+	}
+	responses.JSON(w, http.StatusOK, &Stocks)
+}

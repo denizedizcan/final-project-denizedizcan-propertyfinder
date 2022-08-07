@@ -5,7 +5,6 @@ package handlers
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 
@@ -59,7 +58,6 @@ func (h handler) AddBasketItem(w http.ResponseWriter, r *http.Request) {
 	var basket_item models.BasketItems
 	err = json.Unmarshal(body, &basket_item)
 
-	fmt.Println(basket_item)
 	if err != nil {
 		responses.ERROR(w, http.StatusUnprocessableEntity, err)
 		return
@@ -75,30 +73,25 @@ func (h handler) AddBasketItem(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusNotFound, err)
 		return
 	}
-	fmt.Println("stock checked")
 	if err := basket_item.InsertOneBasketItem(h.DB); err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
 	}
-	fmt.Println("insert basket item")
 	// find price and update basket value find stock
 	if err := basket_item.UpdateBasketItemsValue(h.DB); err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
 	}
-	fmt.Println("update basketitem value")
 
 	//updateBasket
 	if err := basket_item.UpdateBasketValue(h.DB); err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
 	}
-	fmt.Println("update basket value")
 
 	var basket models.Basket
 
 	basket, err = basket_item.FindUserBasketbyBasketitem(h.DB)
-	fmt.Println("find user")
 
 	if err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
@@ -192,12 +185,6 @@ func (h handler) DeleteOneItem(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := basket_item.DeleteBasketItem(h.DB); err != nil {
-		responses.ERROR(w, http.StatusInternalServerError, err)
-		return
-	}
-
-	// find price and update basket value find stock
-	if err := basket_item.UpdateBasketItemsValue(h.DB); err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
 	}
