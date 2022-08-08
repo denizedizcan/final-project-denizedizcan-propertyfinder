@@ -90,10 +90,12 @@ func (u *User) LoginUser(db *gorm.DB) error {
 
 	var user User
 
-	if result := db.Model(User{}).Where("email = ?", u.Email).Take(&user); result.Error != nil {
+	if result := db.Model(User{}).Where("email = ?", u.Email).First(&user); result.Error != nil {
 		return result.Error
 	}
-
+	if u.Password != user.Password {
+		return errors.New("faild to login wrong password")
+	}
 	return nil
 }
 

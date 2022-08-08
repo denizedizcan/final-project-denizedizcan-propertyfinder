@@ -1,7 +1,10 @@
 package handlers
 
 import (
+	"errors"
 	"net/http"
+
+	"github.com/denizedizcan/final-project-denizedizcan-propertyfinder/api/responses"
 )
 
 // middleware
@@ -12,10 +15,9 @@ func SetMiddlewareJSON(next http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
-/*
 func SetMiddlewareAuthentication(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		err := ValidateToken(w, r)
+		err := TokenValid(r)
 		if err != nil {
 			responses.ERROR(w, http.StatusUnauthorized, errors.New("Unauthorized"))
 			return
@@ -23,4 +25,3 @@ func SetMiddlewareAuthentication(next http.HandlerFunc) http.HandlerFunc {
 		next(w, r)
 	}
 }
-*/
