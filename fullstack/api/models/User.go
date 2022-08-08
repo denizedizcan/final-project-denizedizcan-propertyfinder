@@ -76,6 +76,7 @@ func (u *User) Validate(action string) error {
 	}
 }
 
+//Crate user
 func (u *User) SaveUser(db *gorm.DB) error {
 
 	if result := db.Create(&u); result.Error != nil {
@@ -84,6 +85,7 @@ func (u *User) SaveUser(db *gorm.DB) error {
 	return nil
 }
 
+//login user
 func (u *User) LoginUser(db *gorm.DB) error {
 
 	var user User
@@ -95,6 +97,7 @@ func (u *User) LoginUser(db *gorm.DB) error {
 	return nil
 }
 
+//find user from db
 func (u *User) FindUser(db *gorm.DB) error {
 	if u.UserID != 0 {
 		if result := db.Model(&u).Preload(clause.Associations).Find(&u); result.Error != nil {
@@ -107,6 +110,7 @@ func (u *User) FindUser(db *gorm.DB) error {
 	return nil
 }
 
+// find user data and return it
 func (u *User) FindUserData(db *gorm.DB) (*User, error) {
 	if u.UserID != 0 {
 		if result := db.Model(User{}).Preload(clause.Associations).Find(&u); result.Error != nil {
@@ -119,6 +123,7 @@ func (u *User) FindUserData(db *gorm.DB) (*User, error) {
 	return u, nil
 }
 
+// find users basket
 func (b *User) FindUserBasketbyUser(db *gorm.DB) (Basket, error) {
 
 	b, err := b.FindUserData(db)

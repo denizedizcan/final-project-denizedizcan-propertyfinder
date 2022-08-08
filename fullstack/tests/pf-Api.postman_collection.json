@@ -1,0 +1,424 @@
+{
+	"info": {
+		"_postman_id": "a4b0aaca-4fc0-4d63-a5ce-3a02530b4b5d",
+		"name": "pf-Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20044094"
+	},
+	"item": [
+		{
+			"name": "http://localhost:12345/list-products",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n    \"name\": \"MBJ Women's Solid Short Sleeve Boat Neck V\",\n    \"base_code\": \"65044-2316\",\n    \"sku\": 555524,\n    \"is_active\": true,\n    \"language\": \"tr-tr\",\n    \"vat\":1\n  }, {\n    \"name\": \"Rain Jacket Women Windbreaker Striped Climbing Raincoats\",\n    \"base_code\": \"55714-4409\",\n    \"sku\": 245774,\n    \"is_active\": true,\n    \"language\": \"tr-tr\",\n    \"vat\":8\n  }, {\n    \"name\": \"Mens Casual Premium T-Shirts\",\n    \"base_code\": \"11444-020\",\n    \"sku\": 457751,\n    \"is_active\": true,\n    \"language\": \"tr-tr\",\n    \"vat\":1\n  }, {\n    \"name\": \"Mens Casual Premium Slim Fit T-Shirts\",\n    \"base_code\": \"0363-8220\",\n    \"sku\": 178283,\n    \"is_active\": false,\n    \"language\": \"tr-tr\",\n    \"vat\":1\n  }, {\n    \"name\": \"Removable Hooded Faux Leather Moto Biker Jacket\",\n    \"base_code\": \"68084-554\",\n    \"sku\": 745313,\n    \"is_active\": false,\n    \"language\": \"tr-tr\",\n    \"vat\":1\n  }, {\n    \"name\": \"Removable Hooded Faux Leather Moto Biker Jacket\",\n    \"base_code\": \"69114-1001\",\n    \"sku\": 224578,\n    \"is_active\": true,\n    \"language\": \"tr-tr\",\n    \"vat\":18\n  }, {\n    \"name\": \"Mens Casual Premium Slim Fit T-Shirts\",\n    \"base_code\": \"59762-1258\",\n    \"sku\": 412245,\n    \"is_active\": false,\n    \"language\": \"tr-tr\",\n    \"vat\":8\n  }, {\n    \"name\": \"Mens Casual Premium Slim Fit T-Shirts\",\n    \"base_code\": \"55700-020\",\n    \"sku\": 757544,\n    \"is_active\": true,\n    \"language\": \"tr-tr\",\n    \"vat\":8\n  }, {\n    \"name\": \"Mens Casual Premium Shorts\", \n    \"base_code\": \"0264-9872\",\n    \"sku\": 889656,\n    \"is_active\": false,\n    \"language\": \"tr-tr\",\n    \"vat\":18\n  }, {\n    \"name\": \"DANVOUY Womens T Shirt Casual Cotton Short\",\n    \"base_code\": \"0527-1352\",\n    \"sku\": 998452,\n    \"is_active\": true,\n    \"language\": \"tr-tr\",\n    \"vat\":8\n  }]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/list-products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"list-products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/add-products",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n    \"name\": \"MBJ Women's Solid Short Sleeve Boat Neck V\",\n    \"base_code\": \"65044-2316\",\n    \"sku\": 555524,\n    \"is_active\": true,\n    \"language\": \"tr-tr\",\n    \"vat\":1\n  }, {\n    \"name\": \"Rain Jacket Women Windbreaker Striped Climbing Raincoats\",\n    \"base_code\": \"55714-4409\",\n    \"sku\": 245774,\n    \"is_active\": true,\n    \"language\": \"tr-tr\",\n    \"vat\":8\n  }, {\n    \"name\": \"Mens Casual Premium T-Shirts\",\n    \"base_code\": \"11444-020\",\n    \"sku\": 457751,\n    \"is_active\": true,\n    \"language\": \"tr-tr\",\n    \"vat\":1\n  }, {\n    \"name\": \"Mens Casual Premium Slim Fit T-Shirts\",\n    \"base_code\": \"0363-8220\",\n    \"sku\": 178283,\n    \"is_active\": false,\n    \"language\": \"tr-tr\",\n    \"vat\":1\n  }, {\n    \"name\": \"Removable Hooded Faux Leather Moto Biker Jacket\",\n    \"base_code\": \"68084-554\",\n    \"sku\": 745313,\n    \"is_active\": false,\n    \"language\": \"tr-tr\",\n    \"vat\":1\n  }, {\n    \"name\": \"Removable Hooded Faux Leather Moto Biker Jacket\",\n    \"base_code\": \"69114-1001\",\n    \"sku\": 224578,\n    \"is_active\": true,\n    \"language\": \"tr-tr\",\n    \"vat\":18\n  }, {\n    \"name\": \"Mens Casual Premium Slim Fit T-Shirts\",\n    \"base_code\": \"59762-1258\",\n    \"sku\": 412245,\n    \"is_active\": false,\n    \"language\": \"tr-tr\",\n    \"vat\":8\n  }, {\n    \"name\": \"Mens Casual Premium Slim Fit T-Shirts\",\n    \"base_code\": \"55700-020\",\n    \"sku\": 757544,\n    \"is_active\": true,\n    \"language\": \"tr-tr\",\n    \"vat\":8\n  }, {\n    \"name\": \"Mens Casual Premium Shorts\", \n    \"base_code\": \"0264-9872\",\n    \"sku\": 889656,\n    \"is_active\": false,\n    \"language\": \"tr-tr\",\n    \"vat\":18\n  }, {\n    \"name\": \"DANVOUY Womens T Shirt Casual Cotton Short\",\n    \"base_code\": \"0527-1352\",\n    \"sku\": 998452,\n    \"is_active\": true,\n    \"language\": \"tr-tr\",\n    \"vat\":8\n  }]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/add-products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"add-products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/add-stocks",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n    \"sku\": 555524,\n    \"quantity\": 5\n  }, {\n    \"sku\": 245774,\n    \"quantity\": 6\n  }, {\n\n    \"sku\": 457751,\n    \"quantity\": 3\n\n  }, {\n\n    \"sku\": 178283,\n    \"quantity\": 8\n\n  }, {\n\n    \"sku\": 745313,\n    \"quantity\": 10\n\n  }, {\n\n    \"sku\": 224578,\n    \"quantity\": 21\n\n  }, {\n\n    \"sku\": 412245,\n    \"quantity\": 11\n\n  }, {\n\n    \"sku\": 757544,\n    \"quantity\": 13\n\n  }, {\n\n    \"sku\": 889656,\n    \"quantity\": 23\n\n  }, {\n\n    \"sku\": 998452,\n    \"quantity\": 30\n\n  }]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/add-stocks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"add-stocks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/list-stocks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12345/list-stocks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"list-stocks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/add-prices",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n    \"sku\": 555524,\n    \"price\": 133\n  }, {\n    \"sku\": 245774,\n    \"price\": 120\n  }, {\n\n    \"sku\": 457751,\n    \"price\": 100\n\n  }, {\n\n    \"sku\": 178283,\n    \"price\": 150\n\n  }, {\n\n    \"sku\": 745313,\n    \"price\": 169\n\n  }, {\n\n    \"sku\": 224578,\n    \"price\": 99\n\n  }, {\n\n    \"sku\": 412245,\n    \"price\": 320\n\n  }, {\n\n    \"sku\": 757544,\n    \"price\": 180\n\n  }, {\n\n    \"sku\": 889656,\n    \"price\": 200\n\n  }, {\n\n    \"sku\": 998452,\n    \"price\": 220\n\n  }]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/add-prices",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"add-prices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/list-prices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12345/list-prices",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"list-prices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/create-user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Name\": \"deniz\",\n    \"Email\": \"de@123.com\",\n    \"Password\": \"de\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/create-user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"create-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/get-basket",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Name\": \"deniz\",\n    \"Email\": \"de@123.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/get-basket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"get-basket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/add-to-basket",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"Sku\": 412245,\n   \"basket_id\": 1,\n   \"Quantity\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/add-to-basket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"add-to-basket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/update-basketitem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"Sku\": 412245,\n   \"basket_id\": 1,\n   \"Quantity\":10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/update-basketitem",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"update-basketitem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/delete-basketitem",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"Sku\": 412245,\n   \"basket_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/delete-basketitem",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"delete-basketitem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/add-order",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"basket_id\": 1,\n    \"user_id\": 1,\n    \"value\": 180,\n    \"BasketItems\": [\n        {\n            \"basket_id\": 1,\n            \"sku\": 457751,\n            \"quantity\": 1,\n            \"value\": 200\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/add-order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"add-order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/update-stocks",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n    \"sku\": 555524,\n    \"quantity\": 20\n  }, {\n    \"sku\": 245774,\n    \"quantity\": 20\n  }, {\n\n    \"sku\": 457751,\n    \"quantity\": 20\n\n  }, {\n\n    \"sku\": 178283,\n    \"quantity\": 20\n\n  }, {\n\n    \"sku\": 745313,\n    \"quantity\": 20\n\n  }, {\n\n    \"sku\": 224578,\n    \"quantity\": 21\n\n  }, {\n\n    \"sku\": 412245,\n    \"quantity\": 40\n\n  }, {\n\n    \"sku\": 757544,\n    \"quantity\": 20\n\n  }, {\n\n    \"sku\": 889656,\n    \"quantity\": 20\n\n  }, {\n\n    \"sku\": 998452,\n    \"quantity\": 30\n\n  }]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/update-stocks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"update-stocks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/show-user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Name\": \"deniz\",\n    \"Email\": \"de@123.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/show-user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"show-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/add-old-order",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"basket_id\": 1,\n    \"user_id\": 1,\n    \"value\": 3020.8,\n    \"BasketItems\": [\n        {\n            \"basket_id\": 1,\n            \"sku\": 412245,\n            \"quantity\": 10,\n            \"value\": 3200\n        }\n    ]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/add-old-order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"add-old-order"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

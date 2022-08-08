@@ -9,6 +9,7 @@ import (
 	"github.com/denizedizcan/final-project-denizedizcan-propertyfinder/api/responses"
 )
 
+// create user handler
 func (h handler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
@@ -52,6 +53,7 @@ func (h handler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	responses.JSON(w, http.StatusCreated, &user)
 }
 
+// login handler
 func (h handler) Login(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
@@ -83,6 +85,7 @@ func (h handler) Login(w http.ResponseWriter, r *http.Request) {
 	responses.JSON(w, http.StatusOK, &user)
 }
 
+// show user details handler
 func (h handler) ShowUser(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 

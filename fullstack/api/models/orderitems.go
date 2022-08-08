@@ -15,6 +15,7 @@ type OrderItems struct {
 	CreatedAt   time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
 }
 
+// create order items with list
 func CreateOrderItems(db *gorm.DB, b []OrderItems) error {
 	if result := db.Model(&OrderItems{}).Create(&b); result.Error != nil {
 		return result.Error
@@ -22,6 +23,7 @@ func CreateOrderItems(db *gorm.DB, b []OrderItems) error {
 	return nil
 }
 
+// delete order item
 func DeleteOrderItem(db *gorm.DB, o OrderItems) error {
 	if result := db.Model(&OrderItems{}).Where("sku = ?", o.Sku).Delete(&o); result.Error != nil {
 		return result.Error

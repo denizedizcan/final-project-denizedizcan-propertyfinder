@@ -9,6 +9,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// start the app and handle routes
 func main() {
 	fmt.Println("Starting App..")
 	DB := db.Init()
@@ -35,5 +36,3 @@ func main() {
 
 	http.ListenAndServe(":12345", router)
 }
-
-// basket item add update test

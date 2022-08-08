@@ -1,13 +1,13 @@
 package models
 
 import (
-	"fmt"
-
 	"gorm.io/gorm"
 )
 
+// discont value to check
 const discount_check float64 = 3000
 
+// check last 4 order and check if orders total value is higher then discount check if higher return the discount amount to do
 func (u *Basket) CalculateLastForOrder(db *gorm.DB) float64 {
 	var user User
 
@@ -53,6 +53,7 @@ func (u *Basket) CalculateLastForOrder(db *gorm.DB) float64 {
 	return discount
 }
 
+// check if basket has 4 or more same item if it is the case make a discount and return the discount value
 func (u *Basket) CheckIf4item(db *gorm.DB) float64 {
 	var discount float64
 
@@ -68,6 +69,7 @@ func (u *Basket) CheckIf4item(db *gorm.DB) float64 {
 	return discount
 }
 
+//check for last month orders total value if its higher then discount check return the value for the discount
 func (u *Basket) CalculateLastMonthOrder(db *gorm.DB) float64 {
 	orders, err := u.FindLastMonthOrders(db)
 
@@ -88,13 +90,11 @@ func (u *Basket) CalculateLastMonthOrder(db *gorm.DB) float64 {
 	return discount
 }
 
+// check for all discount avaible and pick the highest discount value
 func (u *Basket) FindDiscount(db *gorm.DB) float64 {
 	last_for_order := u.CalculateLastForOrder(db)
 	check_if_4 := u.CheckIf4item(db)
 	last_month := u.CalculateLastMonthOrder(db)
-	fmt.Println("last_for_order: ", last_for_order)
-	fmt.Println("check_if_4: ", check_if_4)
-	fmt.Println("last_month: ", last_month)
 
 	if last_for_order > check_if_4 && last_for_order > last_month {
 		return last_for_order

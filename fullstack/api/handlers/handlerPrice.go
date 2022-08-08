@@ -9,6 +9,7 @@ import (
 	"github.com/denizedizcan/final-project-denizedizcan-propertyfinder/api/responses"
 )
 
+// get price list
 func (h handler) GetPrice(w http.ResponseWriter, r *http.Request) {
 
 	var Price []models.Price
@@ -24,6 +25,7 @@ func (h handler) GetPrice(w http.ResponseWriter, r *http.Request) {
 	responses.JSON(w, http.StatusOK, &Price)
 }
 
+//add price list
 func (h handler) AddPrice(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()

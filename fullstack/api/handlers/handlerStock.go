@@ -9,6 +9,7 @@ import (
 	"github.com/denizedizcan/final-project-denizedizcan-propertyfinder/api/responses"
 )
 
+// get stock list
 func (h handler) GetStocks(w http.ResponseWriter, r *http.Request) {
 
 	var Stocks []models.Stock
@@ -24,6 +25,7 @@ func (h handler) GetStocks(w http.ResponseWriter, r *http.Request) {
 	responses.JSON(w, http.StatusOK, &Stocks)
 }
 
+// add stocks
 func (h handler) AddStocks(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()
@@ -48,6 +50,7 @@ func (h handler) AddStocks(w http.ResponseWriter, r *http.Request) {
 	responses.JSON(w, http.StatusOK, &Stocks)
 }
 
+// update stock list
 func (h handler) UpdateStock(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()

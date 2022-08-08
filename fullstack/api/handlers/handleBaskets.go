@@ -12,6 +12,7 @@ import (
 	"github.com/denizedizcan/final-project-denizedizcan-propertyfinder/api/responses"
 )
 
+// get basket of the user
 func (h handler) GetBasket(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()
@@ -44,6 +45,7 @@ func (h handler) GetBasket(w http.ResponseWriter, r *http.Request) {
 	responses.JSON(w, http.StatusOK, &basket)
 }
 
+// add basket item to basket
 func (h handler) AddBasketItem(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()
@@ -54,7 +56,7 @@ func (h handler) AddBasketItem(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusUnprocessableEntity, err)
 		return
 	}
-
+	// get the basket item from body
 	var basket_item models.BasketItems
 	err = json.Unmarshal(body, &basket_item)
 
@@ -73,6 +75,7 @@ func (h handler) AddBasketItem(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusNotFound, err)
 		return
 	}
+	// insert basket item
 	if err := basket_item.InsertOneBasketItem(h.DB); err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
@@ -83,7 +86,7 @@ func (h handler) AddBasketItem(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	//updateBasket
+	//updateBasket value
 	if err := basket_item.UpdateBasketValue(h.DB); err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
@@ -95,7 +98,7 @@ func (h handler) AddBasketItem(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
 	}
-
+	// check for discount
 	discount := basket.FindDiscount(h.DB)
 	basket.Value -= discount
 
@@ -115,6 +118,7 @@ func (h handler) AddBasketItem(w http.ResponseWriter, r *http.Request) {
 	responses.JSON(w, http.StatusOK, &basket)
 }
 
+// update the basket item quantity
 func (h handler) UpdateBasketItem(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()
@@ -144,7 +148,7 @@ func (h handler) UpdateBasketItem(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusNotFound, err)
 		return
 	}
-
+	// update the basket item
 	if err := basket_item.UpdateBasketItem(h.DB); err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
@@ -156,7 +160,7 @@ func (h handler) UpdateBasketItem(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	//updateBasket
+	//updateBasket value
 	if err := basket_item.UpdateBasketValue(h.DB); err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
@@ -169,7 +173,7 @@ func (h handler) UpdateBasketItem(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
 	}
-
+	// check for discount
 	discount := basket.FindDiscount(h.DB)
 	basket.Value -= discount
 
@@ -189,6 +193,7 @@ func (h handler) UpdateBasketItem(w http.ResponseWriter, r *http.Request) {
 	responses.JSON(w, http.StatusOK, &basket)
 }
 
+// delete one item from basket
 func (h handler) DeleteOneItem(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()
@@ -230,7 +235,7 @@ func (h handler) DeleteOneItem(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
 	}
-
+	// after delete check for discount
 	discount := basket.FindDiscount(h.DB)
 	basket.Value -= discount
 

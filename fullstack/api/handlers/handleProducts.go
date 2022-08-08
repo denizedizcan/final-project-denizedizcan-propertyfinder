@@ -9,6 +9,7 @@ import (
 	"github.com/denizedizcan/final-project-denizedizcan-propertyfinder/api/responses"
 )
 
+// get product list
 func (h handler) GetProducts(w http.ResponseWriter, r *http.Request) {
 
 	var products []models.Product
@@ -24,6 +25,7 @@ func (h handler) GetProducts(w http.ResponseWriter, r *http.Request) {
 	responses.JSON(w, http.StatusOK, &products)
 }
 
+// add product list
 func (h handler) AddProducts(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()

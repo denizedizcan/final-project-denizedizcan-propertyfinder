@@ -15,6 +15,7 @@ type Order struct {
 	OrderItems  []OrderItems `gorm:"foreignKey:OrderNumber;references:OrderNumber"`
 }
 
+// create order
 func (o *Order) CreateOrder(db *gorm.DB) (uint64, error) {
 	if result := db.Create(&o); result.Error != nil {
 		return 0, result.Error
@@ -22,6 +23,7 @@ func (o *Order) CreateOrder(db *gorm.DB) (uint64, error) {
 	return o.OrderNumber, nil
 }
 
+// create old order
 func (o *Order) CreateOrderOld(db *gorm.DB) (uint64, error) {
 	o.CreatedAt = time.Now().AddDate(0, 0, -15)
 
@@ -31,6 +33,7 @@ func (o *Order) CreateOrderOld(db *gorm.DB) (uint64, error) {
 	return o.OrderNumber, nil
 }
 
+// find order data and return it
 func (o *Order) FindOrder(db *gorm.DB) (*Order, error) {
 
 	if o.OrderNumber != 0 {
@@ -41,6 +44,7 @@ func (o *Order) FindOrder(db *gorm.DB) (*Order, error) {
 	return o, nil
 }
 
+// delete order
 func (o *Order) DeleteOrder(db *gorm.DB) error {
 	var orderItems []OrderItems
 	if result := db.Model(Order{}).Preload(clause.Associations).Where("order_number = ?", o.OrderNumber).Find(&orderItems); result.Error != nil {

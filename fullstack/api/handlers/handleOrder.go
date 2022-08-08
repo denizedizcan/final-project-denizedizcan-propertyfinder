@@ -3,7 +3,6 @@ package handlers
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 
@@ -11,6 +10,7 @@ import (
 	"github.com/denizedizcan/final-project-denizedizcan-propertyfinder/api/responses"
 )
 
+// create order
 func (h handler) AddOrder(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
@@ -37,6 +37,7 @@ func (h handler) AddOrder(w http.ResponseWriter, r *http.Request) {
 
 	order.UserID = basket.UserID
 	order.Value = basket.Value
+	//create order
 	ordernumber, err := order.CreateOrder(h.DB)
 	if err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
@@ -46,7 +47,6 @@ func (h handler) AddOrder(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusInternalServerError, errors.New("order not created"))
 		return
 	}
-	// check nand drop stock
 	lenght := len(basket.BasketItems)
 	if lenght == 0 {
 		responses.ERROR(w, http.StatusUnprocessableEntity, errors.New("basket items not found"))
@@ -56,7 +56,7 @@ func (h handler) AddOrder(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-
+	// check stocks for the items and if stocks availbe drop stock
 	for i := 0; i < lenght; i++ {
 		if err := basket.BasketItems[i].CheckStock(h.DB); err != nil {
 			responses.ERROR(w, http.StatusNotFound, err)
@@ -76,7 +76,7 @@ func (h handler) AddOrder(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-
+	// create order items
 	var order_items []models.OrderItems
 	var order_item models.OrderItems
 	for i := 0; i < lenght; i++ {
@@ -88,7 +88,6 @@ func (h handler) AddOrder(w http.ResponseWriter, r *http.Request) {
 		order_items = append(order_items, order_item)
 	}
 
-	fmt.Println(order_items)
 	if err := models.CreateOrderItems(h.DB, order_items); err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		if err := order.DeleteOrder(h.DB); err != nil {
@@ -120,7 +119,7 @@ func (h handler) AddOrder(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-
+	// free value of the basket
 	if err := basket.UpdateBasketValueAfterOrder(h.DB); err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		if err := order.DeleteOrder(h.DB); err != nil {
@@ -134,6 +133,7 @@ func (h handler) AddOrder(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// list orders
 func (h handler) ListOrder(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
@@ -160,6 +160,7 @@ func (h handler) ListOrder(w http.ResponseWriter, r *http.Request) {
 	responses.JSON(w, http.StatusOK, order)
 }
 
+// add old order
 func (h handler) AddOldOrder(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
@@ -237,7 +238,6 @@ func (h handler) AddOldOrder(w http.ResponseWriter, r *http.Request) {
 		order_items = append(order_items, order_item)
 	}
 
-	fmt.Println(order_items)
 	if err := models.CreateOrderItems(h.DB, order_items); err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		if err := order.DeleteOrder(h.DB); err != nil {

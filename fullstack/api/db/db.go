@@ -9,6 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// init the db
 func Init() *gorm.DB {
 	dbUrl := "postgres://postgres:mysecretpassword@localhost:5432/postgres"
 

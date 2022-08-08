@@ -18,6 +18,7 @@ type BasketItems struct {
 	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
 }
 
+// insert basket item list
 func InsertBasketItems(db *gorm.DB, p []BasketItems) error {
 
 	if result := db.Create(&p); result.Error != nil {
@@ -26,6 +27,7 @@ func InsertBasketItems(db *gorm.DB, p []BasketItems) error {
 	return nil
 }
 
+// insert 1 basket item
 func (b *BasketItems) InsertOneBasketItem(db *gorm.DB) error {
 
 	if result := db.Create(&b); result.Error != nil {
@@ -34,6 +36,7 @@ func (b *BasketItems) InsertOneBasketItem(db *gorm.DB) error {
 	return nil
 }
 
+// update basket item
 func (b *BasketItems) UpdateBasketItem(db *gorm.DB) error {
 	if b.Quantity <= 0 {
 		return errors.New("wrong update quantity")
@@ -43,6 +46,7 @@ func (b *BasketItems) UpdateBasketItem(db *gorm.DB) error {
 	return nil
 }
 
+// find the list of basket items and return the list
 func (b *Basket) FindBasketItems(db *gorm.DB) ([]BasketItems, error) {
 	var basketItems []BasketItems
 
@@ -52,6 +56,7 @@ func (b *Basket) FindBasketItems(db *gorm.DB) ([]BasketItems, error) {
 	return basketItems, nil
 }
 
+// update the basket item total value
 func (b *BasketItems) UpdateBasketItemsValue(db *gorm.DB) error {
 	var prices Price
 	if result := db.Model(&prices).Where("sku = ?", b.Sku).First(&prices); result.Error != nil {
@@ -64,6 +69,7 @@ func (b *BasketItems) UpdateBasketItemsValue(db *gorm.DB) error {
 	return nil
 }
 
+// delete the basket item
 func (b *BasketItems) DeleteBasketItem(db *gorm.DB) error {
 	if result := db.Model(BasketItems{}).Where("sku = ?", b.Sku).Delete(&b); result.Error != nil {
 		return result.Error
@@ -71,6 +77,7 @@ func (b *BasketItems) DeleteBasketItem(db *gorm.DB) error {
 	return nil
 }
 
+// find the product vat percentage and return
 func (b *BasketItems) FindProductVat(db *gorm.DB) (uint8, error) {
 	var product Product
 
@@ -81,6 +88,7 @@ func (b *BasketItems) FindProductVat(db *gorm.DB) (uint8, error) {
 	return product.VAT, nil
 }
 
+// update the total basket value
 func (b *BasketItems) UpdateBasketValue(db *gorm.DB) error {
 
 	var basket Basket
@@ -99,6 +107,7 @@ func (b *BasketItems) UpdateBasketValue(db *gorm.DB) error {
 	return nil
 }
 
+// check stock of the selected basket item
 func (b *BasketItems) CheckStock(db *gorm.DB) error {
 
 	var stock Stock
@@ -111,6 +120,7 @@ func (b *BasketItems) CheckStock(db *gorm.DB) error {
 	return nil
 }
 
+// drop stock if the order has made
 func (b *BasketItems) DropStock(db *gorm.DB) error {
 	var stock Stock
 	if result := db.Model(&stock).Where("sku = ?", b.Sku).First(&stock); result.Error != nil {
@@ -126,6 +136,7 @@ func (b *BasketItems) DropStock(db *gorm.DB) error {
 	return nil
 }
 
+// find the price of the basket item
 func (p *BasketItems) FindOnePrices(db *gorm.DB) (Price, error) {
 
 	var prices Price
@@ -135,6 +146,7 @@ func (p *BasketItems) FindOnePrices(db *gorm.DB) (Price, error) {
 	return prices, nil
 }
 
+// find the user of the basket by basket items
 func (b *BasketItems) FindUserBasketbyBasketitem(db *gorm.DB) (Basket, error) {
 	var basket Basket
 

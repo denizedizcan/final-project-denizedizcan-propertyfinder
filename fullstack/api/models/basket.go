@@ -16,6 +16,7 @@ type Basket struct {
 	BasketItems []BasketItems `gorm:"foreignKey:BasketID;references:BasketID"`
 }
 
+// find all users baskets
 func FindAllBaskets(db *gorm.DB) ([]Basket, error) {
 
 	var Baskets []Basket
@@ -26,6 +27,7 @@ func FindAllBaskets(db *gorm.DB) ([]Basket, error) {
 	return Baskets, nil
 }
 
+// create a basket
 func (b *Basket) InsertBasket(db *gorm.DB) error {
 	if result := db.Create(&b); result.Error != nil {
 		return result.Error
@@ -33,6 +35,7 @@ func (b *Basket) InsertBasket(db *gorm.DB) error {
 	return nil
 }
 
+// cleane basket value after the order
 func (b *Basket) UpdateBasketValueAfterOrder(db *gorm.DB) error {
 
 	if result := db.Model(Basket{}).Preload(clause.Associations).Where("basket_id = ?", b.BasketID).Update("value", 0); result.Error != nil {
@@ -41,6 +44,7 @@ func (b *Basket) UpdateBasketValueAfterOrder(db *gorm.DB) error {
 	return nil
 }
 
+// find the last month orders
 func (b *Basket) FindLastMonthOrders(db *gorm.DB) ([]Order, error) {
 	today := time.Now()
 	lastMonth := today.AddDate(0, -1, 0)
@@ -53,6 +57,7 @@ func (b *Basket) FindLastMonthOrders(db *gorm.DB) ([]Order, error) {
 
 }
 
+// update the basket total value
 func (b *Basket) UpdateBasketValue(db *gorm.DB) error {
 
 	if result := db.Model(Basket{}).Preload(clause.Associations).Where("basket_id = ?", b.BasketID).Update("value", b.Value); result.Error != nil {
@@ -61,6 +66,7 @@ func (b *Basket) UpdateBasketValue(db *gorm.DB) error {
 	return nil
 }
 
+// find the user of the basket
 func (b *Basket) FindUser(db *gorm.DB) (User, error) {
 	var user User
 	if result := db.Model(User{}).Preload(clause.Associations).Where("user_id = ?", b.UserID).First(&user); result.Error != nil {

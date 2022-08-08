@@ -21,6 +21,7 @@ type Product struct {
 	BasketItems []BasketItems `gorm:"foreignKey:Sku;references:Sku"`
 }
 
+//get product list
 func FindAllProducts(db *gorm.DB) ([]Product, error) {
 
 	var products []Product
@@ -31,6 +32,7 @@ func FindAllProducts(db *gorm.DB) ([]Product, error) {
 	return products, nil
 }
 
+// inser product list
 func InsertProducts(db *gorm.DB, p []Product) error {
 	if result := db.Create(&p); result.Error != nil {
 		return result.Error
@@ -38,6 +40,7 @@ func InsertProducts(db *gorm.DB, p []Product) error {
 	return nil
 }
 
+// insert 1 product
 func InsertOneProduct(db *gorm.DB, p Product) error {
 	if result := db.Create(&p); result.Error != nil {
 		return result.Error
