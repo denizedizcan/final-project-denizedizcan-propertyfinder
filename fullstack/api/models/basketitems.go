@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 type BasketItems struct {
@@ -12,7 +13,7 @@ type BasketItems struct {
 	BasketID  uint64    `json:"basket_id"`
 	Sku       uint64    `gorm:"unique" json:"sku"`
 	Quantity  uint32    `json:"quantity"`
-	Value     uint32    `json:"value"`
+	Value     float64   `json:"value"`
 	CreatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
 	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
 }
@@ -56,7 +57,8 @@ func (b *BasketItems) UpdateBasketItemsValue(db *gorm.DB) error {
 	if result := db.Model(&prices).Where("sku = ?", b.Sku).First(&prices); result.Error != nil {
 		return result.Error
 	}
-	if result := db.Model(&b).Where("sku = ?", b.Sku).Update("value", b.Quantity*prices.Value); result.Error != nil {
+	new := float64(b.Quantity) * prices.Value
+	if result := db.Model(&b).Where("sku = ?", b.Sku).Update("value", new); result.Error != nil {
 		return result.Error
 	}
 	return nil
@@ -67,4 +69,77 @@ func (b *BasketItems) DeleteBasketItem(db *gorm.DB) error {
 		return result.Error
 	}
 	return nil
+}
+
+func (b *BasketItems) FindProductVat(db *gorm.DB) (uint8, error) {
+	var product Product
+
+	if result := db.Model(Product{}).Where("sku = ?", b.Sku).First(&product); result.Error != nil {
+		return 0, result.Error
+	}
+
+	return product.VAT, nil
+}
+
+func (b *BasketItems) UpdateBasketValue(db *gorm.DB) error {
+
+	var basket Basket
+	if result := db.Model(Basket{}).Preload(clause.Associations).Where("basket_id = ?", b.BasketID).First(&basket); result.Error != nil {
+		return result.Error
+	}
+	var val float64 = 0
+	for i := 0; len(basket.BasketItems) > i; i++ {
+		val += basket.BasketItems[i].Value
+	}
+
+	if result := db.Model(Basket{}).Preload(clause.Associations).Where("basket_id = ?", b.BasketID).Update("value", val); result.Error != nil {
+		return result.Error
+	}
+
+	return nil
+}
+
+func (b *BasketItems) CheckStock(db *gorm.DB) error {
+
+	var stock Stock
+	if result := db.Model(&stock).Where("sku = ?", b.Sku).First(&stock); result.Error != nil {
+		return result.Error
+	}
+	if stock.Quantity < b.Quantity {
+		return errors.New("not enough stock")
+	}
+	return nil
+}
+
+func (b *BasketItems) DropStock(db *gorm.DB) error {
+	var stock Stock
+	if result := db.Model(&stock).Where("sku = ?", b.Sku).First(&stock); result.Error != nil {
+		return result.Error
+	}
+	if stock.Quantity < b.Quantity {
+		return errors.New("not enough stock")
+	}
+	new_stock := stock.Quantity - b.Quantity
+	if result := db.Model(&stock).Where("sku = ?", b.Sku).Update("quantity", new_stock); result.Error != nil {
+		return result.Error
+	}
+	return nil
+}
+
+func (p *BasketItems) FindOnePrices(db *gorm.DB) (Price, error) {
+
+	var prices Price
+	if result := db.Model(&prices).Where("sku = ?", p.Sku).Find(&prices); result.Error != nil {
+		return Price{}, result.Error
+	}
+	return prices, nil
+}
+
+func (b *BasketItems) FindUserBasketbyBasketitem(db *gorm.DB) (Basket, error) {
+	var basket Basket
+
+	if result := db.Model(Basket{}).Preload(clause.Associations).Where("basket_id = ?", b.BasketID).First(&basket); result.Error != nil {
+		return Basket{}, result.Error
+	}
+	return basket, nil
 }

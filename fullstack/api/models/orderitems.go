@@ -11,7 +11,7 @@ type OrderItems struct {
 	OrderNumber uint64    `json:"ordernumber"`
 	Sku         uint64    `json:"sku"`
 	Quantity    uint32    `json:"quantity"`
-	Value       uint32    `json:"value"`
+	Value       float64   `json:"value"`
 	CreatedAt   time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
 }
 
@@ -23,7 +23,7 @@ func CreateOrderItems(db *gorm.DB, b []OrderItems) error {
 }
 
 func DeleteOrderItem(db *gorm.DB, o OrderItems) error {
-	if result := db.Model(&OrderItems{}).Where("id = ?", o.ID).Delete(&o); result.Error != nil {
+	if result := db.Model(&OrderItems{}).Where("sku = ?", o.Sku).Delete(&o); result.Error != nil {
 		return result.Error
 	}
 	return nil

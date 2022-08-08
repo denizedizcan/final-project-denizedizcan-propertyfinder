@@ -88,8 +88,22 @@ func (h handler) AddBasketItem(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
 	}
-
 	var basket models.Basket
+	basket, err = basket_item.FindUserBasketbyBasketitem(h.DB)
+
+	if err != nil {
+		responses.ERROR(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	discount := basket.FindDiscount(h.DB)
+	basket.Value -= discount
+
+	//update after discount
+	if err := basket.UpdateBasketValue(h.DB); err != nil {
+		responses.ERROR(w, http.StatusInternalServerError, err)
+		return
+	}
 
 	basket, err = basket_item.FindUserBasketbyBasketitem(h.DB)
 
@@ -149,6 +163,21 @@ func (h handler) UpdateBasketItem(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var basket models.Basket
+	basket, err = basket_item.FindUserBasketbyBasketitem(h.DB)
+
+	if err != nil {
+		responses.ERROR(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	discount := basket.FindDiscount(h.DB)
+	basket.Value -= discount
+
+	//update after discount
+	if err := basket.UpdateBasketValue(h.DB); err != nil {
+		responses.ERROR(w, http.StatusInternalServerError, err)
+		return
+	}
 
 	basket, err = basket_item.FindUserBasketbyBasketitem(h.DB)
 
@@ -194,8 +223,22 @@ func (h handler) DeleteOneItem(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
 	}
-
 	var basket models.Basket
+	basket, err = basket_item.FindUserBasketbyBasketitem(h.DB)
+
+	if err != nil {
+		responses.ERROR(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	discount := basket.FindDiscount(h.DB)
+	basket.Value -= discount
+
+	//update after discount
+	if err := basket.UpdateBasketValue(h.DB); err != nil {
+		responses.ERROR(w, http.StatusInternalServerError, err)
+		return
+	}
 
 	basket, err = basket_item.FindUserBasketbyBasketitem(h.DB)
 

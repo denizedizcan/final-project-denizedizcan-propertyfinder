@@ -1,7 +1,6 @@
 package models
 
 import (
-	"errors"
 	"time"
 
 	"gorm.io/gorm"
@@ -39,31 +38,4 @@ func FindAllStocks(db *gorm.DB) ([]Stock, error) {
 		return []Stock{}, result.Error
 	}
 	return stocks, nil
-}
-
-func (b *BasketItems) CheckStock(db *gorm.DB) error {
-
-	var stock Stock
-	if result := db.Model(&stock).Where("sku = ?", b.Sku).First(&stock); result.Error != nil {
-		return result.Error
-	}
-	if stock.Quantity < b.Quantity {
-		return errors.New("not enough stock")
-	}
-	return nil
-}
-
-func (b *BasketItems) DropStock(db *gorm.DB) error {
-	var stock Stock
-	if result := db.Model(&stock).Where("sku = ?", b.Sku).First(&stock); result.Error != nil {
-		return result.Error
-	}
-	if stock.Quantity < b.Quantity {
-		return errors.New("not enough stock")
-	}
-	new_stock := stock.Quantity - b.Quantity
-	if result := db.Model(&stock).Where("sku = ?", b.Sku).Update("quantity", new_stock); result.Error != nil {
-		return result.Error
-	}
-	return nil
 }

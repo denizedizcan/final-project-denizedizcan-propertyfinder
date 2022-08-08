@@ -30,6 +30,7 @@ func main() {
 	router.HandleFunc("/update-basketitem", handlers.SetMiddlewareJSON(h.UpdateBasketItem)).Methods("POST")
 	router.HandleFunc("/delete-basketitem", handlers.SetMiddlewareJSON(h.DeleteOneItem)).Methods("DELETE")
 	router.HandleFunc("/add-order", handlers.SetMiddlewareJSON(h.AddOrder)).Methods("PUT")
+	router.HandleFunc("/add-old-order", handlers.SetMiddlewareJSON(h.AddOldOrder)).Methods("PUT")
 	router.HandleFunc("/list-order", handlers.SetMiddlewareJSON(h.ListOrder)).Methods("GET")
 
 	http.ListenAndServe(":12345", router)

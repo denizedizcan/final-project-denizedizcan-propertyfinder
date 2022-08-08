@@ -118,3 +118,17 @@ func (u *User) FindUserData(db *gorm.DB) (*User, error) {
 	}
 	return u, nil
 }
+
+func (b *User) FindUserBasketbyUser(db *gorm.DB) (Basket, error) {
+
+	b, err := b.FindUserData(db)
+	if err != nil {
+		return Basket{}, err
+	}
+	var basket Basket
+
+	if result := db.Model(Basket{}).Preload(clause.Associations).Where("basket_id = ?", b.Basket.BasketID).First(&basket); result.Error != nil {
+		return Basket{}, result.Error
+	}
+	return basket, nil
+}

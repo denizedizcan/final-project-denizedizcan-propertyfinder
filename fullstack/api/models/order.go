@@ -10,12 +10,21 @@ import (
 type Order struct {
 	OrderNumber uint64       `gorm:"primary_key;auto_increment" json:"ordernumber"`
 	UserID      uint64       `json:"user_id"`
-	Value       uint32       `json:"value"`
+	Value       float64      `json:"value"`
 	CreatedAt   time.Time    `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
 	OrderItems  []OrderItems `gorm:"foreignKey:OrderNumber;references:OrderNumber"`
 }
 
 func (o *Order) CreateOrder(db *gorm.DB) (uint64, error) {
+	if result := db.Create(&o); result.Error != nil {
+		return 0, result.Error
+	}
+	return o.OrderNumber, nil
+}
+
+func (o *Order) CreateOrderOld(db *gorm.DB) (uint64, error) {
+	o.CreatedAt = time.Now().AddDate(0, 0, -15)
+
 	if result := db.Create(&o); result.Error != nil {
 		return 0, result.Error
 	}
