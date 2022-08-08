@@ -25,7 +25,7 @@ func (o *Order) CreateOrder(db *gorm.DB) (uint64, error) {
 
 // create old order
 func (o *Order) CreateOrderOld(db *gorm.DB) (uint64, error) {
-	o.CreatedAt = time.Now().AddDate(0, 0, -15)
+	o.CreatedAt = time.Now().AddDate(0, -3, 0)
 
 	if result := db.Create(&o); result.Error != nil {
 		return 0, result.Error
