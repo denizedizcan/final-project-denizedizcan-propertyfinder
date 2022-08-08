@@ -97,11 +97,11 @@ func (u *User) LoginUser(db *gorm.DB) error {
 
 func (u *User) FindUser(db *gorm.DB) error {
 	if u.UserID != 0 {
-		if result := db.Preload(clause.Associations).Find(&u); result.Error != nil {
+		if result := db.Model(&u).Preload(clause.Associations).Find(&u); result.Error != nil {
 			return result.Error
 		}
 	}
-	if result := db.Preload(clause.Associations).Where("email = ?", u.Email).Find(&u); result.Error != nil {
+	if result := db.Preload(clause.Associations).Model(&u).Where("email = ?", u.Email).Find(&u); result.Error != nil {
 		return result.Error
 	}
 	return nil

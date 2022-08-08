@@ -17,6 +17,7 @@ func main() {
 
 	router.HandleFunc("/create-user", handlers.SetMiddlewareJSON(h.CreateUser)).Methods("POST")
 	router.HandleFunc("/login", handlers.SetMiddlewareJSON(h.Login)).Methods("POST")
+	router.HandleFunc("/show-user", handlers.SetMiddlewareJSON(h.ShowUser)).Methods("GET")
 	router.HandleFunc("/list-products", handlers.SetMiddlewareJSON(h.GetProducts)).Methods("GET")
 	router.HandleFunc("/add-products", handlers.SetMiddlewareJSON(h.AddProducts)).Methods("PUT")
 	router.HandleFunc("/list-stocks", handlers.SetMiddlewareJSON(h.GetStocks)).Methods("GET")
@@ -29,6 +30,7 @@ func main() {
 	router.HandleFunc("/update-basketitem", handlers.SetMiddlewareJSON(h.UpdateBasketItem)).Methods("POST")
 	router.HandleFunc("/delete-basketitem", handlers.SetMiddlewareJSON(h.DeleteOneItem)).Methods("DELETE")
 	router.HandleFunc("/add-order", handlers.SetMiddlewareJSON(h.AddOrder)).Methods("PUT")
+	router.HandleFunc("/list-order", handlers.SetMiddlewareJSON(h.ListOrder)).Methods("GET")
 
 	http.ListenAndServe(":12345", router)
 }

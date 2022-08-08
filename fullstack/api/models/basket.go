@@ -73,3 +73,11 @@ func (b *BasketItems) UpdateBasketValue(db *gorm.DB) error {
 
 	return nil
 }
+
+func (b *Basket) UpdateBasketValueAfterOrder(db *gorm.DB) error {
+
+	if result := db.Model(Basket{}).Preload(clause.Associations).Where("basket_id = ?", b.BasketID).Update("value", 0); result.Error != nil {
+		return result.Error
+	}
+	return nil
+}

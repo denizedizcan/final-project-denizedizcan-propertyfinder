@@ -82,3 +82,27 @@ func (h handler) Login(w http.ResponseWriter, r *http.Request) {
 	}
 	responses.JSON(w, http.StatusOK, &user)
 }
+
+func (h handler) ShowUser(w http.ResponseWriter, r *http.Request) {
+	defer r.Body.Close()
+
+	body, err := ioutil.ReadAll(r.Body)
+
+	if err != nil {
+		responses.ERROR(w, http.StatusUnprocessableEntity, err)
+	}
+
+	var user models.User
+	err = json.Unmarshal(body, &user)
+
+	if err != nil {
+		responses.ERROR(w, http.StatusUnprocessableEntity, err)
+		return
+	}
+
+	if err := user.FindUser(h.DB); err != nil {
+		responses.ERROR(w, http.StatusInternalServerError, err)
+		return
+	}
+	responses.JSON(w, http.StatusOK, &user)
+}
