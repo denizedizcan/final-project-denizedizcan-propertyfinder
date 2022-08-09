@@ -82,7 +82,12 @@ func (h handler) Login(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
 	}
-	responses.JSON(w, http.StatusOK, &user)
+	token, err := CreateToken(user.UserID)
+	if err != nil {
+		responses.ERROR(w, http.StatusInternalServerError, err)
+		return
+	}
+	responses.JSON(w, http.StatusOK, token)
 }
 
 // show user details handler
