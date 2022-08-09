@@ -419,6 +419,65 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "http://localhost:12345/list-order",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ordernumber\": 3,\n    \"user_id\": 1,\n    \"value\": 288,\n    \"created_at\": \"2022-08-09T02:47:15.758448+03:00\",\n    \"OrderItems\": [\n        {\n            \"id\": 4,\n            \"ordernumber\": 3,\n            \"sku\": 412245,\n            \"quantity\": 1,\n            \"value\": 320,\n            \"created_at\": \"2022-08-09T02:47:15.785308+03:00\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/list-order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"list-order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Name\": \"deniz\",\n    \"Email\": \"de@123.com\",\n    \"Password\": \"de\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
