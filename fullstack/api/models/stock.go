@@ -14,6 +14,7 @@ type Stock struct {
 	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
 }
 
+// insert stock list to db
 func InsertStocks(db *gorm.DB, s []Stock) error {
 	if result := db.Create(&s); result.Error != nil {
 		return result.Error
@@ -21,6 +22,7 @@ func InsertStocks(db *gorm.DB, s []Stock) error {
 	return nil
 }
 
+// update stocks with slice
 func UpdateStocks(db *gorm.DB, s []Stock) error {
 	for i := 0; i < len(s); i++ {
 		if result := db.Model(&Stock{}).Where("sku = ?", s[i].Sku).Update("quantity", s[i].Quantity); result.Error != nil {
@@ -30,6 +32,7 @@ func UpdateStocks(db *gorm.DB, s []Stock) error {
 	return nil
 }
 
+// get stock list
 func FindAllStocks(db *gorm.DB) ([]Stock, error) {
 
 	var stocks []Stock

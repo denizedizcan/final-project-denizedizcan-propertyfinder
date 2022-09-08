@@ -13,7 +13,7 @@ type Price struct {
 	CreatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
 	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
 }
-
+// insert price list
 func InsertPrices(db *gorm.DB, p []Price) error {
 	if result := db.Create(&p); result.Error != nil {
 		return result.Error
@@ -21,6 +21,7 @@ func InsertPrices(db *gorm.DB, p []Price) error {
 	return nil
 }
 
+// get price list
 func FindAllPrices(db *gorm.DB) ([]Price, error) {
 
 	var prices []Price
